@@ -19,6 +19,21 @@ class remi {
             },
           },
         },
+        {
+          opcode: "split_",
+          blockType: Scratch.blockType.REPORTER,
+          text: "[TEXT]の[INDEX]以下を切り取る",
+          arguments: {
+            TEXT: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: "abcd"
+            },
+            INDEX: {
+              type: Scratch.ArgumentType.NUMBER,
+              defaultValue: 2
+            }
+          }
+        }
       ],
       menus: {
         ENCODE_MENU: {
@@ -52,6 +67,11 @@ class remi {
         .join("");
     }
     return text;
+  }
+  sprit_(args) {
+    const text = args.TEXT
+    const index = args.INDEX
+    return text.slice(index)
   }
 }
 Scratch.extensions.register(new remi());
