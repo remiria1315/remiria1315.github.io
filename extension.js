@@ -21,7 +21,7 @@ class remi {
         },
         {
           opcode: "split_",
-          blockType: Scratch.blockType.REPORTER,
+          blockType: Scratch.BlockType.REPORTER,
           text: "[TEXT]の[INDEX]以下を切り取る",
           arguments: {
             TEXT: {
@@ -31,6 +31,21 @@ class remi {
             INDEX: {
               type: Scratch.ArgumentType.NUMBER,
               defaultValue: 2
+            }
+          }
+        },
+        {
+          opcode: "remove_str",
+          blockType: Scratch.BlockType.REPORTER,
+          text: "[TEXT]から[TARGET]を削除",
+          arguments: {
+            TEXT: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: "abcd"
+            },
+            TARGET: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: "b"
             }
           }
         }
@@ -68,10 +83,15 @@ class remi {
     }
     return text;
   }
-  sprit_(args) {
+  split_(args) {
     const text = args.TEXT
     const index = args.INDEX
     return text.slice(index)
+  }
+  remove_str(args) {
+    const text = args.TEXT
+    const target = args.TARGET
+    return text.replaceAll(target, "")
   }
 }
 Scratch.extensions.register(new remi());
